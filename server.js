@@ -7,14 +7,10 @@ function start(route, handle){
     function onRequest(request, response) {
         var pathname = url.parse(request.url).pathname;
         
-        route(handle, pathname);
-        
-        response.writeHead("200", {"Content-Type": "text/html"});
-        response.write('<h3>Server as a module</h1>');
-        response.end();
+        route(handle, pathname, response);
     }    
 
-    http.createServer(onRequest).listen(process.env.PORT, process.env.IP);
+    http.createServer(onRequest).listen(8888);
 
     console.log('Server has started');
   

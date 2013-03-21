@@ -1,16 +1,17 @@
 //request router
 
 
-function route(handle, pathname){
+function route(handle, pathname, response){
     console.log("Got a request like that: " + pathname);
     if(typeof handle[pathname] === 'function'){
-        handle[pathname]();
+        return handle[pathname](response);
     }
     else{
-        console.log("No request found for: " + pathname + " typeof: " + typeof handle["/"]);
+        console.log("No request found for: " + pathname);
+		response.writeHead(404, {"Content-Type": "text/html"});
+		response.write("404 Not Found");
+		response.end();
     }
 }
 
 exports.route = route;
-
-//another git comment
